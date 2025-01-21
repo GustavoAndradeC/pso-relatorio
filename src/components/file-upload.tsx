@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Upload, X, RefreshCw } from 'lucide-react';
+import { Upload, X } from 'lucide-react';
 
 interface FileUploadProps {
     fileName: string | null;
