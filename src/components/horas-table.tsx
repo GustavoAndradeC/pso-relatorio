@@ -2,18 +2,25 @@ import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 
+interface DadosPivotados {
+    profissional: string;
+    [key: string]: string | number; 
+}
+
 interface HorasTableProps {
     dias: string[];
-    dadosPivotados: any[];
+    dadosPivotados: DadosPivotados[]; 
 }
 
 export function HorasTable({ dias, dadosPivotados }: HorasTableProps) {
     const [searchQuery, setSearchQuery] = useState<string>("");
 
+    // Filtrando dados com base na consulta de busca
     const filteredData = dadosPivotados.filter(item =>
         item.profissional.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    // Função para verificar se o dia é fim de semana
     const isWeekend = (dia: string) => {
         const [day, month, year] = dia.split("/").map(Number);
         const formattedDate = new Date(year, month - 1, day);
@@ -21,6 +28,7 @@ export function HorasTable({ dias, dadosPivotados }: HorasTableProps) {
         return dayOfWeek === 0 || dayOfWeek === 6;
     };
 
+    // Função para verificar se o valor é menor que 8
     const isLessThanEight = (value: number) => value < 8;
 
     return (
