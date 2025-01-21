@@ -15,7 +15,7 @@ interface DadosHoras {
 
 interface PivotedData {
     profissional: string;
-    [key: string]: string | number;
+    [key: string]: number | string; 
 }
 
 export default function HorasTrabalhadasApp() {
@@ -35,7 +35,7 @@ export default function HorasTrabalhadasApp() {
             const data = new Uint8Array(e.target?.result as ArrayBuffer);
             const workbook = XLSX.read(data, { type: "array" });
             const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-            const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            const jsonData: string[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
             const structuredData: DadosHoras[] = jsonData
                 .slice(3)
